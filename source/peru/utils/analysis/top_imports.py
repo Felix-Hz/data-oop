@@ -1,7 +1,7 @@
 import pandas as pd
 
 
-def top_importadores(dfs):
+def top_importers(dfs):
     '''
 
         Analyzes the top three importers for each year of a given NCM by calculating their mean purchase price, total volume in tons,

@@ -17,7 +17,7 @@ def wrangling(dfs):
 
     results_dfs = []
 
-    print(f"\n> MUNGING HISTORICAL DATA:\n")
+    print(f"\n> WRANGLING HISTORICAL DATA:\n")
 
     for i in range(len(dfs)):
         df = dfs[i]
@@ -26,10 +26,11 @@ def wrangling(dfs):
         df = df.loc[:, ['Código NCM', 'Fecha', 'País de Origen', 'Importador', 'Cantidad Comercial', 'Unidad de Medida',  'Tipo de Bulto',
                         'Proveedor', 'Aduana', 'Vía Transporte', 'U$S CIF', 'U$S FOB', 'Kgs. Netos', 'Marca', 'Descripción de Mercadería', 'Descripción para Filtro']]
 
-        # Se eliminan registros que vengan por aire
+        # airway products are deleted
         subset = df['Vía Transporte']
         df = df[subset != 'AEREA']
 
+        # unifying the n/a
         df.loc[df['Marca'] ==
                "SIN MARCA", 'Marca'] = "S/M"
 
@@ -48,9 +49,7 @@ def wrangling(dfs):
         df.loc[df['Marca'] ==
                "No disponible", 'Marca'] = "S/M"
 
-        print("~ Limpiando NCMs...")
-
-        # Estandarizo los valores del NCM
+        print("~ Standarazing NCM codes...")
 
         df['Código NCM'] = df['Código NCM'].astype(str).str.replace('.', '')
         df['Código NCM'] = df['Código NCM'].astype(
@@ -60,7 +59,7 @@ def wrangling(dfs):
         df["U$S Unitario"] = (
             df['U$S CIF'] / df['Kgs. Netos']).round(2)
 
-        print("~ Creando columna de precio...")
+        print("~ Creating target price column...")
 
         df = df.loc[df['U$S Unitario'] <= 1.2]
 
@@ -70,7 +69,6 @@ def wrangling(dfs):
         q3 = df['U$S Unitario'].quantile(0.75)
 
         interquartileRange = q3 - q1
-        # use outlier step (1.5) to determine the boundaries w/ iqr to filter the price with
         lower_bound = q1 - 1.5 * interquartileRange
         upper_bound = q3 + 1.5 * interquartileRange
 

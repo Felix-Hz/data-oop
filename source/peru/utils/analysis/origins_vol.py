@@ -1,7 +1,7 @@
 import pandas as pd
 
 
-def analisis_origenes(dfs):
+def analyzing_origins(dfs):
     '''
 
         Analyses the origin of imported goods over multiple years for given datasets.
