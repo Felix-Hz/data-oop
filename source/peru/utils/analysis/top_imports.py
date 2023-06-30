@@ -43,7 +43,4 @@ def top_importers(dfs):
 
         companies_df = pd.concat([companies_df, transition_df_head], ignore_index=True)
 
-    print("~~~~~~~~~~~~~~~~~~~\n> Current dataframe of the top 3 importers of each year:")
-    print(companies_df)
-
     return companies_df

@@ -36,11 +36,6 @@ def annual_data(dfs):
 
             print(f"- {df['Código NCM'].iloc[0]} ({df['Fecha'].iloc[0].year}) appended.")
 
-    print("~~~~~~~~~~~~~~~~~~~\n> Transition dictionary:")
-
-    for key, values in transition_dic.items():
-        print(f"- {key}: {values}\n")
-
     annual_total_volume = pd.DataFrame.from_records(transition_dic)
 
     return annual_total_volume

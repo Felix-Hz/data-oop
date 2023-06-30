@@ -32,7 +32,4 @@ def analyzing_origins(dfs):
         transition_df = transition_df[['NCM', 'Año', 'Pais', 'Volumen Total (TN)', "Participacion en Vol. Total", 'No. Importaciones']]
         excel_new_data = pd.concat([excel_new_data, transition_df], ignore_index=True)
 
-    print("~~~~~~~~~~~~~~~~~~~\n> Current dataframe of the origins of each year:")
-    print(excel_new_data)
-
     return excel_new_data
