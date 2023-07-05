@@ -16,7 +16,7 @@ class AnnualTotalVolume:
 
     '''
 
-    def __init__(self, dfs: list) -> list:
+    def __init__(self, dfs: list):
         self.dfs = dfs
         self.transition_dic = {
             "NCM": [],
@@ -41,7 +41,8 @@ class AnnualTotalVolume:
         return annual_total_volume
 
     def add_code(self, df: pd.DataFrame) -> pd.DataFrame:
-        self.transition_dic['NCM'].append(''.join(df['Código NCM'].unique().astype(str).tolist()))
+        self.transition_dic['NCM'].append(
+            ''.join(df['Código NCM'].unique().astype(str).tolist()))
         return df
 
     def add_year(self, df: pd.DataFrame) -> pd.DataFrame:
@@ -52,6 +53,6 @@ class AnnualTotalVolume:
         volumenTotalImportacionTn = (df['Kgs. Netos'].sum()/1000).round(2)
         self.transition_dic['Volumen Total'].append(volumenTotalImportacionTn)
         return df
-    
+
     def check_valid_dataframe(self, df: pd.DataFrame) -> bool:
         return df is not None and not df.empty
