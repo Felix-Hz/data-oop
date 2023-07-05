@@ -1,6 +1,5 @@
 import pandas as pd
 
-import pandas as pd
 
 def top_importers(dfs):
     companies_df = pd.DataFrame(columns=[
